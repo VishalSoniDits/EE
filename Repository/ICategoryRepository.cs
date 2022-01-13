@@ -7,8 +7,9 @@ namespace EE.Repository
     public interface ICategoryRepository
     {
          Task<IEnumerable<GetCategoryDTO>> GetCategoryAsync();
-       Task<AddCategoryDTO> AddCategoryAsync(AddCategoryDTO model); 
-       Task<UpdateCategoryDTO> UpdateCategoryAsync(UpdateCategoryDTO model);
-       Task<DeleteCategoryDTO> DeleteCategoryAsync(DeleteCategoryDTO model);
+       Task<ResponseDTO> AddCategoryAsync(AddCategoryDTO model); 
+       Task<ResponseDTO> UpdateCategoryAsync(UpdateCategoryDTO model);
+       Task<ResponseDTO> DeleteCategoryAsync(DeleteCategoryDTO model);
+        Task<IEnumerable<GetCategoryDTO>> GetSearchCategoryAsync(GetSearchCategoryDTO model); 
     }
 }

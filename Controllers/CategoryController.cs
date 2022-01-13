@@ -37,5 +37,10 @@ namespace EE.Controllers
         {
             return Ok(await _categoryRepository.DeleteCategoryAsync(model));
         }
+         [HttpPost("GetSearchCategory")]
+        public async Task<IActionResult> GetSearchCategoryAsync([FromBody]GetSearchCategoryDTO model)
+        {
+            return Ok(await _categoryRepository.GetSearchCategoryAsync(model));
+        }
     }
 }
