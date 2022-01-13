@@ -1,11 +1,16 @@
+using System;
+using System.IO;
 using System.Threading.Tasks;
 using EE.Models;
 using EE.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EE.Controllers
 {
-    public class EmployeesController : ControllerBase
+    [ApiController]
+    [Route("api/[controller]")]
+       public class EmployeesController : ControllerBase
     {
         private readonly IEmployeesRepository _employeesRepository;
         public EmployeesController(IEmployeesRepository employeesRepository)
@@ -16,26 +21,27 @@ namespace EE.Controllers
         [HttpGet("GetEmployees")]
         public async Task<IActionResult> GetCustomerAsync()
         {
-            return Ok( await _employeesRepository.GetEmployeesAsync());
+            return Ok(await _employeesRepository.GetEmployeesAsync());
         }
         [HttpPost("AddEmployees")]
-        public async Task<IActionResult> AddEmployees([FromBody]AddEmployeesDTO model)
+        public async Task<IActionResult> AddEmployees([FromBody] AddEmployeesDTO model)
         {
             return Ok(await _employeesRepository.AddEmployeesAsync(model));
         }
 
         [HttpPut("UpdateEmployees")]
-        public async Task<IActionResult> UpdateEmployees([FromBody]UpdateEmployeesDTO model)
+        public async Task<IActionResult> UpdateEmployees([FromBody] UpdateEmployeesDTO model)
         {
             return Ok(await _employeesRepository.UpdateEmployeesAsync(model));
         }
 
         [HttpDelete("DeleteEmployees")]
-        public async Task<IActionResult> DeleteEmployees([FromBody]DeleteEmployeesDTO model)
+        public async Task<IActionResult> DeleteEmployees([FromBody] DeleteEmployeesDTO model)
         {
             return Ok(await _employeesRepository.DeleteEmployeesAsync(model));
         }
-         [HttpPost("AddImage")]
+
+        [HttpPost("AddImage")]
         public async Task<IActionResult> AddImageAsync([FromForm] AddImageDTO model)
         {
             return Ok(await _employeesRepository.AddImageAsync(model, ""));
