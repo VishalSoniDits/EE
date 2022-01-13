@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EE.Controllers
 {
-    public class SupplierController : ControllerBase
+    [ApiController]
+    [Route("api/[controller]")]
+    public class SupplierController:ControllerBase
     {
-        private readonly ISupplierRepository _supplierRepository;
+         private readonly ISupplierRepository _supplierRepository;
         public SupplierController(ISupplierRepository supplierRepository)
         {
             _supplierRepository = supplierRepository;
