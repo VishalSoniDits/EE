@@ -12,7 +12,7 @@ namespace EE.Repository
          private string connectionString;
         public CategoryRepository()
         {
-            connectionString= @"Server=DITSDEV46;Database=EE;Trusted_Connection=true;";
+            connectionString= @"Server=DITSDEV12\SQLEXPRESS;Database=EE;Trusted_Connection=true;";
         }
 
           public IDbConnection Connection
@@ -22,20 +22,20 @@ namespace EE.Repository
             }
         }
 
-        public async Task<AddCategoryDTO> AddCategoryAsync(AddCategoryDTO model)
+        public async Task<ResponseDTO> AddCategoryAsync(AddCategoryDTO model)
         {
             using(var conn=Connection)
             {
-                var result=await conn.QuerySingleAsync<AddCategoryDTO>("sp_AddCategorys",model,commandType:CommandType.StoredProcedure);
-                return(AddCategoryDTO)result;
+                var result=await conn.QuerySingleAsync<ResponseDTO>("sp_AddCategorys",model,commandType:CommandType.StoredProcedure);
+                return(ResponseDTO)result;
             }
         }
 
-        public async Task<DeleteCategoryDTO> DeleteCategoryAsync(DeleteCategoryDTO model)
+        public async Task<ResponseDTO> DeleteCategoryAsync(DeleteCategoryDTO model)
         {
             using(var conn=Connection){
-                var result=await conn.QuerySingleAsync<DeleteCategoryDTO>("sp_DeleteCategorys",model,commandType:CommandType.StoredProcedure);
-                return(DeleteCategoryDTO)result;
+                var result=await conn.QuerySingleAsync<ResponseDTO>("sp_DeleteCategorys",model,commandType:CommandType.StoredProcedure);
+                return(ResponseDTO)result;
             }
         }
 
@@ -48,12 +48,20 @@ namespace EE.Repository
              }
         }
 
-        public async Task<UpdateCategoryDTO> UpdateCategoryAsync(UpdateCategoryDTO model)
+        public async Task<ResponseDTO> UpdateCategoryAsync(UpdateCategoryDTO model)
         {
             using (var conn=Connection){
-                var result=await conn.QuerySingleAsync<UpdateCategoryDTO>("sp_UpdateCategorys",model,commandType:CommandType.StoredProcedure);
-                return(UpdateCategoryDTO)result;
+                var result=await conn.QuerySingleAsync<ResponseDTO>("sp_UpdateCategorys",model,commandType:CommandType.StoredProcedure);
+                return(ResponseDTO)result;
             }
+        }
+        public async Task<IEnumerable<GetCategoryDTO>> GetSearchCategoryAsync(GetSearchCategoryDTO model)
+        {
+             using (var conn = Connection)
+           {
+        var result = await conn.QueryAsync<GetCategoryDTO>("sp_Search_category",model,commandType:CommandType.StoredProcedure);
+         return result;
+          }
         }
     }
 }
