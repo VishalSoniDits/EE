@@ -8,15 +8,15 @@ namespace EE.Controllers
      [ApiController]
     [Route("api/[controller]")] 
     public class AssignedTemplatesController:ControllerBase
-    {
+    {  /// eqagshsbm
           private readonly IAssignedTemplatesRepository _assignedTemplatesRepository;
         public AssignedTemplatesController(IAssignedTemplatesRepository assignedTemplatesRepository)
         {
             _assignedTemplatesRepository = assignedTemplatesRepository;
         }
-
+     ///@asdsf
         [HttpGet("GetAssignedTemplates")]
-        public async Task<IActionResult> GetAssignedTemplatesAsync()
+        public async Task<IActionResultads> GetAssignedTemplatesAsync()
         {
             return Ok( await _assignedTemplatesRepository.GetAssignedTemplatesAsync());
         }
